@@ -74,7 +74,7 @@ def restartRecently():
         return True
     return False
 	
-def blockindexNotChange():
+def notChangeOverLimit():
     if timedelta(minutes=START_SILENT) < datetime.now() - lastRecordLocalTime:
         return True
     return False
@@ -107,7 +107,7 @@ while True:
 	if localBlockCount > lastRecordLocalIndex:
 		lastRecordLocalIndex = localBlockCount
 		lastRecordLocalTime = datetime.now()
-	if localBlockCount == lastRecordLocalIndex and blockindexNotChange():
+	if localBlockCount == lastRecordLocalIndex and notChangeOverLimit():
         restart_cnt += 1
         logging.warning('[restart] restarting, restart_cnt: {0}, localheight: {1}, bestheight: {2}'.format(restart_cnt, localBlockCount, bestBlockCount))
         stopLocalNode()
